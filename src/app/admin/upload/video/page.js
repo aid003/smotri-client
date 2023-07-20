@@ -4,16 +4,15 @@ import { useState } from "react";
 
 const initialValues = {
   title: "",
-  ratingFilm: 0,
+  ratingFilm: "",
   postersUrl: "psYrl",
-  yearCreate: 2022,
+  yearCreate: "",
   countries: "",
   gendre: "",
   content: "",
-  ageRestriction: 16,
+  ageRestriction: "",
   description: "",
   actors: "",
-  url: "url",
   TitleSeo: "",
   DescriptionSeo: "",
 };
@@ -68,81 +67,86 @@ const Page = () => {
   };
 
   return (
-    <form encType="multipart/form-data">
-      <input
-        type="file"
-        accept=".mp4"
-        name="file"
-        onChange={handleChange}
-      ></input>
-      <input
-        type="text"
-        name="title"
-        placeholder="title"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="number"
-        name="ratingFilm"
-        placeholder="ratingFilm"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="number"
-        name="yearCreate"
-        placeholder="yearCreate"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="text"
-        name="countries"
-        placeholder="countries"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="text"
-        name="gendre"
-        placeholder="gendre"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="text"
-        name="content"
-        placeholder="content"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="number"
-        name="ageRestriction"
-        placeholder="ageRestriction"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="text"
-        name="description"
-        placeholder="description"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="text"
-        name="actors"
-        placeholder="actors"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="text"
-        name="TitleSeo"
-        placeholder="TitleSeo"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input
-        type="text"
-        name="DescriptionSeo"
-        placeholder="DescriptionSeo"
-        onChange={updateVideoInfoHandler}
-      ></input>
-      <input type="submit" onClick={handleUpload}></input>
-    </form>
+    <>
+      <form encType="multipart/form-data">
+        <input
+          type="file"
+          accept=".mp4"
+          name="file"
+          onChange={handleChange}
+        ></input>
+        <input
+          type="text"
+          name="title"
+          placeholder="title"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="number"
+          name="ratingFilm"
+          placeholder="ratingFilm"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="number"
+          name="yearCreate"
+          placeholder="yearCreate"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="countries"
+          placeholder="countries"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="gendre"
+          placeholder="gendre"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="content"
+          placeholder="content"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="number"
+          name="ageRestriction"
+          placeholder="ageRestriction"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="description"
+          placeholder="description"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="actors"
+          placeholder="actors"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="TitleSeo"
+          placeholder="TitleSeo"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="DescriptionSeo"
+          placeholder="DescriptionSeo"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input type="submit" onClick={handleUpload}></input>
+      </form>
+      <video width={600} controls>
+        <source src="http://localhost:5005/films/?title=fucken shit"></source>
+      </video>
+    </>
   );
 };
 
