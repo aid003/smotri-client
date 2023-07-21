@@ -144,7 +144,7 @@ const Page = () => {
         <input type="submit" onClick={handleUpload}></input>
       </form>
       <video width={600} controls>
-        <source src="http://localhost:5005/films/?title=fucken shit"></source>
+        <source src="http://localhost:5005/films/?title=taivan"></source>
       </video>
     </>
   );
