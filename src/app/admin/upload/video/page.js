@@ -3,18 +3,18 @@
 import { useState } from "react";
 
 const initialValues = {
-  title: "",
-  ratingFilm: "",
+  title: "defaulValue",
+  ratingFilm: "0",
   postersUrl: "psYrl",
-  yearCreate: "",
-  countries: "",
-  gendre: "",
-  content: "",
-  ageRestriction: "",
-  description: "",
-  actors: "",
-  TitleSeo: "",
-  DescriptionSeo: "",
+  yearCreate: "0",
+  countries: "defaulValue",
+  gendre: "defaulValue",
+  content: "defaulValue",
+  ageRestriction: "0",
+  description: "defaulValue",
+  actors: "defaulValue",
+  TitleSeo: "defaulValue",
+  DescriptionSeo: "defaulValue",
 };
 
 const initialState = { values: initialValues };
@@ -61,9 +61,10 @@ const Page = () => {
     const res = await fetch("http://localhost:5005/api/upload-video-file", {
       method: "POST",
       body: formData,
+    }).then((res) => {
+      res.status === 201 ? alert("loaded") : alert("film not loaded");
+      res.json();
     });
-    const data = await res.json();
-    console.log(data);
   };
 
   return (
