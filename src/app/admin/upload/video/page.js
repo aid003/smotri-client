@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { customFetch } from "../../../../../middleware/customFetch";
 
 const initialValues = {
   title: "defaulValue",
@@ -58,12 +59,11 @@ const Page = () => {
 
     // process.env.UPLOAD_PATH
 
-    const res = await fetch("http://localhost:5005/api/upload-video-file", {
+    await customFetch("http://localhost:5005/api/upload-video-file", {
       method: "POST",
       body: formData,
     }).then((res) => {
       res.status === 201 ? alert("loaded") : alert("film not loaded");
-      res.json();
     });
   };
 
@@ -145,7 +145,7 @@ const Page = () => {
         <input type="submit" onClick={handleUpload}></input>
       </form>
       <video width={600} controls>
-        <source src="http://localhost:5005/films/?title=taivan"></source>
+        <source src="http://localhost:5005/films/?title=qwerty"></source>
       </video>
     </>
   );

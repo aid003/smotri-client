@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { customFetch } from "../../../../../middleware/customFetch";
 
 const Page = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -43,9 +44,8 @@ const Page = () => {
 
   useEffect(() => {
     async function getTitles() {
-      const response = await fetch("http://localhost:5005/api/get-titles/");
-      const data = await response.json();
-      setTitles(data);
+      const response = await customFetch("http://localhost:5005/api/get-titles/");
+      setTitles(response.data);
     }
     getTitles();
   }, []);
