@@ -1,5 +1,5 @@
 "use client"
-import Header from "../../components/header/Header";
+import Header from "../components/header/Header";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 

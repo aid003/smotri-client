@@ -51,13 +51,16 @@ const Page = () => {
     }
 
     if (action === actions[1]) {
-      const data = await customFetch("http://localhost:5005/api/register-user/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(values),
-      });
+      const data = await customFetch(
+        "http://localhost:5005/api/register-user/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify(values),
+        }
+      );
       localStorage.setItem("colorTheme", data.data.accessToken);
 
       console.log("success registration");

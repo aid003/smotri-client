@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { customFetch } from "../../../../../middleware/customFetch";
+import { customFetch } from "../../../../middleware/customFetch";
 
 const initialValues = {
   title: "defaulValue",
