@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { customFetch } from "../../../middleware/customFetch";
+import { useRouter } from "next/navigation";
 
 const actions = ["login", "register"];
 const initialValues = {
@@ -14,6 +15,8 @@ const initialState = { values: initialValues };
 const Page = () => {
   const [action, setAction] = useState(actions[0]);
   const [state, setState] = useState(initialState);
+
+  const router = useRouter();
 
   const { values } = state;
 
@@ -45,9 +48,17 @@ const Page = () => {
           body: JSON.stringify(values),
         }
       );
+      if (!data) return;
+
       localStorage.setItem("colorTheme", data.data.accessToken);
 
+      if (data.data.role === "User") {
+        alert("У вас недостаточно прав, обратитесь к администратору!");
+        return;
+      }
+      router.push("/admin/service");
       console.log("success login");
+      return;
     }
 
     if (action === actions[1]) {
@@ -62,8 +73,8 @@ const Page = () => {
         }
       );
       localStorage.setItem("colorTheme", data.data.accessToken);
-
       console.log("success registration");
+      return;
     }
   };
 

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { customFetch } from "../../../../middleware/customFetch";
+import { useRouter } from "next/navigation";
 
 const initialValues = {
   title: "defaulValue",
@@ -23,6 +24,37 @@ const initialState = { values: initialValues };
 const Page = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [state, setState] = useState(initialState);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    async function validator() {
+      const token = localStorage.getItem("colorTheme");
+      if (!token) {
+        router.push("/admin/login");
+        return;
+      }
+      const response = await fetch(
+        "http://localhost:5005/api/login-user-with-token/",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const { isValidToken, role } = await response.json();
+
+      if (!isValidToken) {
+        router.push("/admin/login");
+        return;
+      }
+
+      if (role === "User") {
+        router.push("/admin/login");
+      }
+    }
+    validator();
+  }, [router]);
 
   const handleChange = (e) => {
     e.preventDefault();
