@@ -35,7 +35,7 @@ const Page = () => {
         return;
       }
       const response = await fetch(
-        "http://localhost:5005/api/login-user-with-token/",
+        `${process.env.NEXT_PUBLIC_SERVER_PATH}login-user-with-token/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -91,10 +91,13 @@ const Page = () => {
 
     // process.env.UPLOAD_PATH
 
-    await customFetch("http://localhost:5005/api/upload-video-file", {
-      method: "POST",
-      body: formData,
-    }).then((res) => {
+    await customFetch(
+      `${process.env.NEXT_PUBLIC_SERVER_PATH}upload-video-file`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    ).then((res) => {
       res.status === 201 ? alert("loaded") : alert("film not loaded");
     });
   };
@@ -177,7 +180,9 @@ const Page = () => {
         <input type="submit" onClick={handleUpload}></input>
       </form>
       <video width={600} controls>
-        <source src="http://localhost:5005/films/?title=qwerty"></source>
+        <source
+          src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=qwerty`}
+        ></source>
       </video>
     </>
   );

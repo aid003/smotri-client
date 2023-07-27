@@ -39,7 +39,7 @@ const Page = () => {
     e.preventDefault();
     if (action === actions[0]) {
       const data = await customFetch(
-        "http://localhost:5005/api/login-user-with-login/",
+        `${process.env.NEXT_PUBLIC_SERVER_PATH}login-user-with-login/`,
         {
           method: "POST",
           headers: {
@@ -56,6 +56,7 @@ const Page = () => {
         alert("У вас недостаточно прав, обратитесь к администратору!");
         return;
       }
+      
       router.push("/admin/service");
       console.log("success login");
       return;
@@ -63,7 +64,7 @@ const Page = () => {
 
     if (action === actions[1]) {
       const data = await customFetch(
-        "http://localhost:5005/api/register-user/",
+        `${process.env.NEXT_PUBLIC_SERVER_PATH}register-user/`,
         {
           method: "POST",
           headers: {

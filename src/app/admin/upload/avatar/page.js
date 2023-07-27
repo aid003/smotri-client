@@ -18,7 +18,7 @@ const Page = () => {
         return;
       }
       const response = await fetch(
-        "http://localhost:5005/api/login-user-with-token/",
+        `${process.env.NEXT_PUBLIC_SERVER_PATH}login-user-with-token/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ const Page = () => {
     // process.env.UPLOAD_PATH
 
     const res = await fetch(
-      "http://localhost:5005/api/upload-avatar-for-video/",
+      `${process.env.NEXT_PUBLIC_SERVER_PATH}upload-avatar-for-video/`,
       {
         method: "POST",
         body: formData,
@@ -77,7 +77,7 @@ const Page = () => {
   useEffect(() => {
     async function getTitles() {
       const response = await customFetch(
-        "http://localhost:5005/api/get-titles/"
+        `${process.env.NEXT_PUBLIC_SERVER_PATH}get-titles/`
       );
       setTitles(response.data);
     }

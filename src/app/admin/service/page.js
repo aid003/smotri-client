@@ -1,22 +1,18 @@
 "use client";
-import { customFetch } from "@/middleware/customFetch";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default async function Home() {
   const router = useRouter();
-  const [colorTheme, setColorTheme] = useState();
 
   useEffect(() => {
     async function validator() {
       const token = localStorage.getItem("colorTheme");
-      setColorTheme(token);
       if (!token) {
         router.push("/admin/login");
-        return;
       }
       const response = await fetch(
-        "http://localhost:5005/api/login-user-with-token/",
+        `${process.env.NEXT_PUBLIC_SERVER_PATH}login-user-with-token/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -27,7 +23,6 @@ export default async function Home() {
 
       if (!isValidToken) {
         router.push("/admin/login");
-        return;
       }
 
       if (role === "User") {
@@ -36,7 +31,6 @@ export default async function Home() {
     }
     validator();
   }, [router]);
-
 
   return (
     <div>
@@ -53,6 +47,13 @@ export default async function Home() {
         }}
       >
         Загрузка картинки
+      </a>
+      <a
+        onClick={() => {
+          router.push("/admin/update");
+        }}
+      >
+        Изменить данные
       </a>
     </div>
   );
