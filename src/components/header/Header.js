@@ -1,4 +1,6 @@
+"use client"
 import styles from './Header.module.css'
+import Searcher from './Searcher';
 
 const Header = ({ children }) => {
   return (
@@ -6,7 +8,7 @@ const Header = ({ children }) => {
       <div className={styles.headerContainer}>
         Burger
         <h1>Title</h1>
-
+        <Searcher></Searcher>
         
       </div>
       {children}
