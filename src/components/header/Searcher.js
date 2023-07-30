@@ -1,27 +1,35 @@
 "use client";
+import { GetAnkets } from "@/hooks/useListFilmsAnket";
 import { ValidateSearch } from "@/middleware/validateSearch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import styles from './Header.module.css'
 
 const Searcher = () => {
-  const [value, setValue] = useState("");
-  const [resultSearch, setResultSearch] = useState([])
+  const [searchResult, setSearchResult] = useState([]);
+  const [filmsAnket, setFilmsAnket] = useState([]);
 
-  const inputHandler = ({ target }) => {
-    setValue(target.value);
-  };
+  const [isLoadingAnkets, setIsLoadingAnkets] = useState(true);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    const data = await ValidateSearch(value);
-    setResultSearch(data)
+  useEffect(() => {
+    async function getAnkets() {
+      setFilmsAnket(await GetAnkets());
+      setIsLoadingAnkets(false);
+    }
+    getAnkets();
+  }, []);
+
+  const inputHandler = async ({ target }) => {
+    if (filmsAnket && !isLoadingAnkets && target.value) {
+      const data = await ValidateSearch(target.value, filmsAnket);
+      setSearchResult(data);
+    }
+
+    console.log(searchResult);
   };
 
   return (
-    <div>
-      <form>
-        <input onChange={inputHandler}></input>
-        <button onClick={submitHandler}>ok</button>
-      </form>
+    <div className={styles.searchInput}>
+      <input placeholder="Input your film" onChange={inputHandler}></input>
     </div>
   );
 };

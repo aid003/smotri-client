@@ -8,7 +8,6 @@ const Header = ({ children }) => {
       <div className={styles.headerContainer}>
         <h1>Title</h1>
         <Searcher></Searcher>
-        
       </div>
       {children}
     </>
