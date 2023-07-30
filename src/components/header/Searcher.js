@@ -1,13 +1,27 @@
-import { useAnkets } from "@/hooks/useListFilmsAnket";
+"use client";
+import { ValidateSearch } from "@/middleware/validateSearch";
+import { useState } from "react";
 
-const Searcher = async () => {
-  const ankets = await useAnkets()
+const Searcher = () => {
+  const [value, setValue] = useState("");
+  const [resultSearch, setResultSearch] = useState([])
+
+  const inputHandler = ({ target }) => {
+    setValue(target.value);
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const data = await ValidateSearch(value);
+    setResultSearch(data)
+  };
 
   return (
     <div>
-      {ankets.map((el) => (
-        <p key={el.title}>{el.title}</p>
-      ))}
+      <form>
+        <input onChange={inputHandler}></input>
+        <button onClick={submitHandler}>ok</button>
+      </form>
     </div>
   );
 };
