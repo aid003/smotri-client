@@ -1,5 +1,3 @@
-import { useAnkets } from "../hooks/useListFilmsAnket";
-
 export const ValidateSearch = async (usersString, anketsData) => {
   const ankets = anketsData;
   const userValue = usersString;
