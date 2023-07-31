@@ -1,13 +1,15 @@
-"use client"
-import styles from './Header.module.css'
-import Searcher from './Searcher';
+"use client";
+import styles from "./Header.module.css";
+import Searcher from "./Searcher";
 
 const Header = ({ children }) => {
   return (
     <>
       <div className={styles.headerContainer}>
-        <h1>Title</h1>
-        <Searcher></Searcher>
+        <div className={styles.widthContainer}>
+          <h1>Title</h1>
+          <Searcher></Searcher>
+        </div>
       </div>
       {children}
     </>

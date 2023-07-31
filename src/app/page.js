@@ -1,5 +1,4 @@
 "use client";
-import Header from "../components/header/Header";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 
@@ -8,7 +7,9 @@ export default function Home() {
 
   return (
     <>
-      <h1>dsfefef</h1>
+      <div className={styles.pageContainer}>
+        <h1>dsfefef</h1>
+      </div>
     </>
   );
 }
