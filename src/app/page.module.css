@@ -8,7 +8,7 @@
 .wrapperContainer {
     width: 92%;
     margin: auto;
-    /* max-width: 1540px;  */
+    max-width: 1770px; 
     padding-top: 5vh; 
 }
 
@@ -34,7 +34,7 @@
 }
 
 .contentContainer {
-    background-color: pink;
+    /* background-color: pink; */
     width: 85%;
 }
 

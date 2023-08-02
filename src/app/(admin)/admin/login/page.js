@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { customFetch } from "../../../middleware/customFetch";
+import { customFetch } from "../../../../middleware/customFetch";
 import { useRouter } from "next/navigation";
 
 const actions = ["login", "register"];
@@ -56,7 +56,7 @@ const Page = () => {
         alert("У вас недостаточно прав, обратитесь к администратору!");
         return;
       }
-      
+
       router.push("/admin/service");
       console.log("success login");
       return;

@@ -1,12 +1,10 @@
-"use client";
 import CategorySet from "@/components/categotyTile/CategorySet";
 import styles from "./page.module.css";
-import { useRouter } from "next/navigation";
 import Showcase from "@/components/showcase/Showcase";
+import Loading from "./loading";
+import { Suspense } from "react";
 
 export default function Home() {
-  const router = useRouter();
-
   return (
     <>
       <div className={styles.pageContainer}>
@@ -16,7 +14,9 @@ export default function Home() {
             <CategorySet></CategorySet>
           </div>
           <div className={styles.contentContainer}>
-            <Showcase></Showcase>
+            <Suspense fallback={<Loading />}>
+              <Showcase></Showcase>
+            </Suspense>
           </div>
         </div>
       </div>
