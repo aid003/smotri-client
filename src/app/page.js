@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Showcase from "@/components/showcase/Showcase";
 import Loading from "./loading";
 import { Suspense } from "react";
+import NewFilms from "@/components/newFilms/NewFilms";
 
 export default function Home() {
   return (
@@ -15,7 +16,9 @@ export default function Home() {
           </div>
           <div className={styles.contentContainer}>
             <Suspense fallback={<Loading />}>
-              <Showcase></Showcase>
+              <Showcase>
+                <NewFilms></NewFilms>
+              </Showcase>
             </Suspense>
           </div>
         </div>

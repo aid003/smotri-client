@@ -31,11 +31,13 @@
     background-color: rgb(61, 61, 94);
     width: 15%;
     height: 100%;
+    
 }
 
 .contentContainer {
-    /* background-color: pink; */
+    background-color: rgb(90, 129, 214);
     width: 85%;
+    overflow-y: scroll;
 }
 
 .heading {

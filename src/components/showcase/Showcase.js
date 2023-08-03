@@ -1,29 +1,11 @@
-import styles from "./showcase.module.css";
-import FilmsItem from "./FilmsItem";
-import { customFetch } from "@/middleware/customFetch";
+import styles from './showcase.module.css'
 
-const Showcase = async () => {
-  const films = await getData();
-
+const Showcase = async ({ children }) => {
   return (
-    <div>
-      {films.map((film) => (
-        <FilmsItem key={film.id} data={film}></FilmsItem>
-      ))}
-    </div>
+    <>
+      <div className={styles.showcaseContainer}>{children}</div>
+    </>
   );
 };
 
 export default Showcase;
-
-async function getData() {
-  const films = await customFetch(
-    `${process.env.NEXT_PUBLIC_SERVER_PATH}get-films/`
-  );
-
-  if (!films) {
-    throw new Error("Data fetching false");
-  }
-
-  return films.data;
-}
