@@ -7,7 +7,7 @@ const NewFilms = async () => {
 
   return (
     <div>
-      <h3>New films</h3>
+      <h3 className={styles.heading}>New films</h3>
       <div className={styles.filmsContainer}>
         {films.map((film) => (
           <FilmsItem key={film.id} data={film}></FilmsItem>

@@ -1,5 +1,15 @@
+@font-face {
+    font-family: Bearer Money;
+    src: url(../../../public/fonts/beermoney.woff2);
+}
+
 .filmsContainer {
     width: 100%;
-    display: flex;
-    
+    display: flex; 
+}
+
+.heading {
+    font-family: Bearer Money;
+    font-size: 34px;
+    padding: 0 0 10px 10px;
 }

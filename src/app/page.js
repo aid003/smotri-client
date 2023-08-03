@@ -18,6 +18,18 @@ export default function Home() {
             <Suspense fallback={<Loading />}>
               <Showcase>
                 <NewFilms></NewFilms>
+                <div className={styles.space}></div>
+                <NewFilms></NewFilms>
+                <div className={styles.space}></div>
+                <NewFilms></NewFilms>
+                <div className={styles.space}></div>
+                <NewFilms></NewFilms>
+                <div className={styles.space}></div>
+                <NewFilms></NewFilms>
+                <div className={styles.space}></div>
+                <NewFilms></NewFilms>
+                <div className={styles.space}></div>
+                <NewFilms></NewFilms>
               </Showcase>
             </Suspense>
           </div>
