@@ -1,4 +1,3 @@
-"use client";
 import styles from "./Header.module.css";
 import Searcher from "./Searcher";
 

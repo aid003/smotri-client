@@ -14,5 +14,11 @@ export const ValidateSearch = async (usersString, anketsData) => {
     }
   }
 
+  if (userValue.lenght < 1) {
+    while (result.length > 0) {
+      result.pop()
+    }
+  }
+
   return result;
 };

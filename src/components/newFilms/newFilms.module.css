@@ -6,6 +6,11 @@
 .filmsContainer {
     width: 100%;
     display: flex; 
+    overflow-x: scroll;
+}
+
+.filmsContainer::-webkit-scrollbar{
+    width: 0;
 }
 
 .heading {

@@ -2,11 +2,12 @@
 import { GetAnkets } from "@/hooks/useListFilmsAnket";
 import { ValidateSearch } from "@/middleware/validateSearch";
 import { useEffect, useState } from "react";
-import styles from './Header.module.css'
+import styles from "./Header.module.css";
 
 const Searcher = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [filmsAnket, setFilmsAnket] = useState([]);
+  const [isOpenWindow, setIsOpenWindow] = useState(false);
 
   const [isLoadingAnkets, setIsLoadingAnkets] = useState(true);
 
@@ -24,12 +25,34 @@ const Searcher = () => {
       setSearchResult(data);
     }
 
+    if (target.value < 1) {
+      setSearchResult([]);
+    }
+
     console.log(searchResult);
+  };
+
+  const openWindowHandler = (e) => {
+    setIsOpenWindow(true);
   };
 
   return (
     <div className={styles.searchInput}>
-      <input placeholder="Input your film" onChange={inputHandler}></input>
+      <input
+        placeholder="Input your film"
+        onChange={inputHandler}
+        onClick={openWindowHandler}
+      ></input>
+      {isOpenWindow &&
+        (searchResult ? (
+          <div>
+            {searchResult.map((el) => (
+              <p key={el.title}>{el.title}</p>
+            ))}
+          </div>
+        ) : (
+          <div>no</div>
+        ))}
     </div>
   );
 };
