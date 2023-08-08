@@ -1,6 +1,6 @@
-import { customFetch } from "@/middleware/customFetch";
 import styles from "./newFilms.module.css";
 import FilmsItem from "../filmItem/FilmItem";
+import { getData } from "./GetData";
 
 const NewFilms = async () => {
   const films = await getData();
@@ -12,21 +12,10 @@ const NewFilms = async () => {
         {films.map((film) => (
           <FilmsItem key={film.id} data={film}></FilmsItem>
         ))}
+        <button>next</button>
       </div>
     </div>
   );
 };
-
-async function getData() {
-  const films = await customFetch(
-    `${process.env.NEXT_PUBLIC_SERVER_PATH}get-films/`
-  );
-
-  if (!films) {
-    throw new Error("Data fetching false");
-  }
-
-  return films.data;
-}
 
 export default NewFilms;
