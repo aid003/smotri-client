@@ -1,62 +1,42 @@
 @font-face {
-    font-family: Bearer Money;
-    src: url(../../../public/fonts/beermoney.woff2);
+  font-family: Bearer Money;
+  src: url(../../../public/fonts/beermoney.woff2);
 }
 
 .filmsContainer {
-    width: 100%;
-    display: flex; 
-    overflow-x: scroll;
-    align-items: center;
-    position: relative;
-    flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .filmsContainer::-webkit-scrollbar {
-    width: 0;
+  width: 0;
 }
 
 .heading {
-    font-family: Bearer Money;
-    font-size: 34px;
-    padding: 0 0 10px 10px;
+  font-family: Bearer Money;
+  font-size: 34px;
+  padding: 0 0 10px 10px;
 }
 
 .next {
-    position: sticky;
-    font-size: 40px;
-    right: 4px; 
-    margin-bottom: 3px; 
+  position: sticky;
+  font-size: 40px;
+  right: 4px;
+  margin-bottom: 3px;
 }
 
 .next:hover {
-    color: grey;
-    opacity: .8;
+  color: grey;
+  opacity: 0.8;
 }
 
-.back {
-    position: fixed;
-    font-size: 35px;
-    left: 18%; 
-    margin-bottom: 3px;
-}
+
 
 .back:hover {
-    color: grey;
-    opacity: .8;
+  color: grey;
+  opacity: 0.8;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

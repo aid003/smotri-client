@@ -5,11 +5,13 @@ import { getData } from "./GetData";
 import { useEffect, useRef, useState } from "react";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { BsArrowLeftCircle } from "react-icons/bs";
+import debounce from "lodash.debounce";
 
 const NewFilms = () => {
   const [films, setFilms] = useState([]);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [isButtonClick, setIsButtonClick] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [currentScrollLeft, setCurrentScrollLeft] = useState(0);
 
   const listRef = useRef(null);
 
@@ -22,11 +24,16 @@ const NewFilms = () => {
     get();
   }, []);
 
-  useEffect(() => {
+  const checkForScrollPosition = () => {
     const { current } = listRef;
-    setCanScrollLeft(current.scrollLeft > 0);
-    setIsButtonClick(false)
-  }, [isButtonClick]);
+    if (current) {
+      const { scrollLeft } = current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(getWidthBlock(listRef) - scrollLeft > 80);
+      setCurrentScrollLeft(scrollLeft);
+      console.log(getWidthBlock(listRef), scrollLeft);
+    }
+  };
 
   const getWidthBlock = (blockRef) => {
     const { width } = blockRef.current.getBoundingClientRect();
@@ -35,34 +42,55 @@ const NewFilms = () => {
 
   const scrollByContainer = (distance) => {
     listRef.current?.scrollBy({ left: distance, behavior: "smooth" });
-    setIsButtonClick(true);
+  };
+
+  const debounceCheckForScrollPosition = debounce(checkForScrollPosition, 100);
+
+  useEffect(() => {
     const { current } = listRef;
-    console.log(current.scrollLeft)
+    checkForScrollPosition();
+    current?.addEventListener("scroll", debounceCheckForScrollPosition);
+
+    return () => {
+      current?.removeEventListener("scroll", debounceCheckForScrollPosition);
+      debounceCheckForScrollPosition.cancel();
+    };
+  }, []);
+
+  const back = {
+    position: "absolute",
+    left: `${currentScrollLeft + 3}px`,
+    fontSize: "35px",
+    marginBottom: "3px",
+    zIndex: "5"
   };
 
   return (
     <div>
       <h3 className={styles.heading}>New films</h3>
       <div className={styles.filmsContainer} ref={listRef}>
-        {films.map((film) => (
-          <FilmsItem key={film.id} data={film}></FilmsItem>
-        ))}
-        <div
-          onClick={() => {
-            scrollByContainer(getWidthBlock(listRef) - 180);
-          }}
-          className={styles.next}
-        >
-          <BsArrowRightCircle></BsArrowRightCircle>
-        </div>
         {canScrollLeft ? (
           <div
             onClick={() => {
-              scrollByContainer(-getWidthBlock(listRef) - 180);
+              scrollByContainer(-getWidthBlock(listRef) + 300);
             }}
             className={styles.back}
+            style={back}
           >
             <BsArrowLeftCircle></BsArrowLeftCircle>
+          </div>
+        ) : null}
+        {films.map((film) => (
+          <FilmsItem key={film.id} data={film}></FilmsItem>
+        ))}
+        {canScrollRight ? (
+          <div
+            onClick={() => {
+              scrollByContainer(getWidthBlock(listRef) - 300);
+            }}
+            className={styles.next}
+          >
+            <BsArrowRightCircle></BsArrowRightCircle>
           </div>
         ) : null}
       </div>
