@@ -1,12 +1,13 @@
 "use client";
 
+import HeaderService from "@/components/headerService/HeaderService";
 import { customFetch } from "@/middleware/customFetch";
 import { useState } from "react";
 
 const initialValues = {
   title: "defaulValue",
   ratingFilm: "0",
-  postersUrl: "psYrl",
+  postersUrl: "psYrl.jpg",
   yearCreate: "0",
   countries: "defaulValue",
   gendre: "defaulValue",
@@ -48,7 +49,7 @@ const Page = () => {
       `${process.env.NEXT_PUBLIC_SERVER_PATH}test-create-entry/`,
       {
         method: "POST",
-        headers: {
+        headers: {  
           "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify(values),
@@ -61,6 +62,7 @@ const Page = () => {
   };
   return (
     <div>
+      <HeaderService />
       <form>
         <input
           type="text"

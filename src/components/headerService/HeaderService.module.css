@@ -1,0 +1,48 @@
+.container {
+    width: 100%;
+    height: 7vh;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.listItem {
+    background-color: purple;
+    font-size: large;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    padding: 4px 15px 4px 15px;
+    height: 30px;
+    border-radius: 15px;
+}
+
+.listItem:hover {
+    background-color: white;
+    border: 1px solid purple;
+    color: purple;
+}
+
+.main {
+    background-color: blue;
+    font-size: large;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    padding: 4px 15px 4px 15px;
+    height: 30px;
+    border-radius: 15px;
+}
+
+.main:hover {
+    background-color: white;
+    border: 1px solid blue;
+    color: blue;
+}

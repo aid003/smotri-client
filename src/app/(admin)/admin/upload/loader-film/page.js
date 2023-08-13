@@ -1,6 +1,8 @@
 "use client";
 
+import HeaderService from "@/components/headerService/HeaderService";
 import { customFetch } from "@/middleware/customFetch";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Page = () => {
@@ -9,6 +11,8 @@ const Page = () => {
   const [voiceActing, setVoiceActing] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     async function getTitles() {
@@ -48,11 +52,14 @@ const Page = () => {
     }
     const formData = new FormData();
     formData.append("file", videoFile);
-    formData.append("information", JSON.stringify({ title: selectedTitle, quality: quality, voiceActing: voiceActing }));
-
-    console.log(formData);
-
-    // process.env.UPLOAD_PATH
+    formData.append(
+      "information",
+      JSON.stringify({
+        title: selectedTitle,
+        quality: quality,
+        voiceActing: voiceActing,
+      })
+    );
 
     await customFetch(`${process.env.NEXT_PUBLIC_SERVER_PATH}new/`, {
       method: "POST",
@@ -60,10 +67,12 @@ const Page = () => {
     }).then((res) => {
       res.status === 201 ? alert("loaded") : alert("film not loaded");
     });
+    router.push("/admin/service/")
   };
 
   return (
     <div>
+      <HeaderService />
       <select onChange={changePickedTitleHandler}>
         <option value={null}>Выберите фильм</option>
         {titles.map((el) => (
@@ -98,6 +107,11 @@ const Page = () => {
         />
         <button onClick={uploadHandler}>upload</button>
       </form>
+      {/* <video width={600} controls>
+        <source
+          src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=qwerty`}
+        ></source>
+      </video> */}
     </div>
   );
 };

@@ -1,0 +1,33 @@
+@font-face {
+  font-family: Page info;
+  src: url(../../../../../public/fonts/Bloggersans.woff2);
+}
+
+.container {
+    margin-top: 4vh;
+    padding-top: 4vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: antiquewhite;
+}
+
+.listItem {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1% 4vh 1% 4vh;
+    margin-bottom: 3vh;
+    border-radius: 24px;
+    background-color: cadetblue;
+    font-size: large;
+    font-family: Page info;
+}
+
+.listItem:hover {
+    color: wheat;
+}
+

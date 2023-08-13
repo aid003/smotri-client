@@ -1,4 +1,5 @@
 "use client";
+import HeaderService from "@/components/headerService/HeaderService";
 import { customFetch } from "@/middleware/customFetch";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -92,6 +93,7 @@ const Page = () => {
 
   return (
     <div>
+      <HeaderService />
       <select onChange={filmTitlePicker}>
         <option value={false}>Выберите фильм</option>
         {titles.map((el) => (

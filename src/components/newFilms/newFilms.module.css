@@ -7,9 +7,12 @@
     width: 100%;
     display: flex; 
     overflow-x: scroll;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
 }
 
-.filmsContainer::-webkit-scrollbar{
+.filmsContainer::-webkit-scrollbar {
     width: 0;
 }
 
@@ -18,3 +21,42 @@
     font-size: 34px;
     padding: 0 0 10px 10px;
 }
+
+.next {
+    position: sticky;
+    font-size: 40px;
+    right: 4px; 
+    margin-bottom: 3px; 
+}
+
+.next:hover {
+    color: grey;
+    opacity: .8;
+}
+
+.back {
+    position: fixed;
+    font-size: 35px;
+    left: 18%; 
+    margin-bottom: 3px;
+}
+
+.back:hover {
+    color: grey;
+    opacity: .8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

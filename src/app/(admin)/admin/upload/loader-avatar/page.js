@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { customFetch } from "../../../../../middleware/customFetch";
 import { useRouter } from "next/navigation";
+import HeaderService from "@/components/headerService/HeaderService";
 
 const Page = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -86,6 +87,7 @@ const Page = () => {
 
   return (
     <>
+      <HeaderService />
       <form encType="multipart/form-data">
         <input
           type="file"

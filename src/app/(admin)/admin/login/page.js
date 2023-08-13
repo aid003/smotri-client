@@ -57,8 +57,8 @@ const Page = () => {
         return;
       }
 
-      router.push("/admin/service");
-      console.log("success login");
+      alert("success login");
+      router.push("/admin/service/");
       return;
     }
 
@@ -74,7 +74,8 @@ const Page = () => {
         }
       );
       localStorage.setItem("colorTheme", data.data.accessToken);
-      console.log("success registration");
+
+      alert("success registration");
       return;
     }
   };

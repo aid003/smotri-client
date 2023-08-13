@@ -1,8 +1,10 @@
 "use client";
+import HeaderService from "@/components/headerService/HeaderService";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import styles from "./service.module.css";
+import { useEffect } from "react";
 
-export default async function Home() {
+export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
@@ -33,28 +35,42 @@ export default async function Home() {
   }, [router]);
 
   return (
-    <div>
-      <a
-        onClick={() => {
-          router.push("/admin/upload/video");
-        }}
-      >
-        Загрузка фильма
-      </a>
-      <a
-        onClick={() => {
-          router.push("/admin/upload/avatar");
-        }}
-      >
-        Загрузка картинки
-      </a>
-      <a
-        onClick={() => {
-          router.push("/admin/update");
-        }}
-      >
-        Изменить данные
-      </a>
-    </div>
+    <>
+      <HeaderService />
+      <ul className={styles.container}>
+        <li
+          className={styles.listItem}
+          onClick={() => {
+            router.push("/admin/upload/loader-entry/");
+          }}
+        >
+          Загрузка сущности фильма
+        </li>
+        <li
+          className={styles.listItem}
+          onClick={() => {
+            router.push("/admin/upload/loader-film/");
+          }}
+        >
+          Загрузка видеоматериала фильма
+        </li>
+        <li
+          className={styles.listItem}
+          onClick={() => {
+            router.push("/admin/upload/loader-avatar");
+          }}
+        >
+          Загрузка постера фильма
+        </li>
+        <li
+          className={styles.listItem}
+          onClick={() => {
+            router.push("/admin/update");
+          }}
+        >
+          Изменить данные фильма
+        </li>
+      </ul>
+    </>
   );
 }
