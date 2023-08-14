@@ -5,6 +5,16 @@ import Loading from "./loading";
 import { Suspense } from "react";
 import NewFilms from "@/components/newFilms/NewFilms";
 
+export async function generateStaticParams() {
+  const posts = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_PATH}get-titles/`
+  ).then((res) => res.json());
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 export default function Home() {
   return (
     <>

@@ -1,7 +1,9 @@
 "use client";
 
 import HeaderService from "@/components/headerService/HeaderService";
+import { useAccessValidator } from "@/hooks/useAccessValidator";
 import { customFetch } from "@/middleware/customFetch";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const initialValues = {
@@ -24,10 +26,12 @@ const initialValues = {
 const initialState = { values: initialValues };
 
 const Page = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
   const [state, setState] = useState(initialState);
 
   const { values } = state;
+
+  const router = useRouter();
+  const access = useAccessValidator(router);
 
   const updateVideoInfoHandler = ({ target }) => {
     setState((prev) => ({
@@ -49,7 +53,7 @@ const Page = () => {
       `${process.env.NEXT_PUBLIC_SERVER_PATH}test-create-entry/`,
       {
         method: "POST",
-        headers: {  
+        headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify(values),

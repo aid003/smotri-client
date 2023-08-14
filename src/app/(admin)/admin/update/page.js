@@ -1,5 +1,6 @@
 "use client";
 import HeaderService from "@/components/headerService/HeaderService";
+import { useAccessValidator } from "@/hooks/useAccessValidator";
 import { customFetch } from "@/middleware/customFetch";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -15,33 +16,7 @@ const Page = () => {
   const [value, setValue] = useState("");
 
   const router = useRouter();
-
-  useEffect(() => {
-    async function validator() {
-      const token = localStorage.getItem("colorTheme");
-      if (!token) {
-        router.push("/admin/login");
-      }
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_PATH}login-user-with-token/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const { isValidToken, role } = await response.json();
-
-      if (!isValidToken) {
-        router.push("/admin/login");
-      }
-
-      if (role === "User") {
-        router.push("/admin/login");
-      }
-    }
-    validator();
-  }, [router]);
+  const acess = useAccessValidator(router);
 
   useEffect(() => {
     async function getTitles() {
