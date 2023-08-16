@@ -92,6 +92,7 @@ const Page = () => {
       </select>
       <input
         onChange={inputQualityHandler}
+        type="number"
         placeholder="input quality video"
         required
       />

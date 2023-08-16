@@ -3,12 +3,15 @@ import Image from "next/image";
 import styles from "./filmItem.module.css";
 import { useState } from "react";
 import img from '../../../public/loaders/default.png'
+import { useRouter } from "next/navigation";
 
 const FilmsItem = (data) => {
   const values = data.data;
 
   const [isHover, setIsHower] = useState(false);
   const [poster, setPoster] = useState('')
+
+  const router = useRouter()
 
 
   const progress = {
@@ -43,12 +46,17 @@ const FilmsItem = (data) => {
     setIsHower(false);
   };
 
+  const clickHandler = () => {
+    router.push(`/film/${values.title}`)
+  }
+
   return (
     <>
       <div
         className={styles.filmContainer}
         onMouseEnter={changeHoverStateOn}
         onMouseLeave={changeHoverStateOff}
+        onClick={clickHandler}
       >
         <div className={styles.imgContainer}>
           <Image
