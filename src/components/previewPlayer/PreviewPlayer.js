@@ -6,7 +6,7 @@ import offVolumeImg from "../../../public/svg/sound-off-svgrepo-com.svg";
 import onVolumeImg from "../../../public/svg/sound-volume-2-svgrepo-com.svg";
 import styles from "./previewPlaeer.module.css";
 
-const PreviewPlayer = () => {
+const PreviewPlayer = (film) => {
   const [onSound, setOnSound] = useState(true);
   const [fullScreen, setFullScreen] = useState(false);
 
@@ -18,6 +18,13 @@ const PreviewPlayer = () => {
     fullScreen && videoRef.current.requestFullscreen();
   };
 
+  const mutedHandler = () => {
+    setOnSound(!onSound);
+    onSound
+      ? (videoRef.current.muted = false)
+      : (videoRef.current.muted = true);
+  };
+
   useEffect(() => {
     videoRef.current.muted = true;
     videoRef.current.play();
@@ -25,13 +32,13 @@ const PreviewPlayer = () => {
 
   return (
     <>
-      <video className="video" width={600} ref={videoRef}>
-        <source
-          src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=qwerty&quality=430`}
-        ></source>
-      </video>
-      <div className="controlsContainer">
-        <div className="controls">
+      <div className={styles.videoPlayer}>
+        <video ref={videoRef} >
+          <source
+            src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=${film}&quality=430`}
+          ></source>
+        </video>
+        <div className={styles.controls}>
           <Image
             className={styles.controlsIcon}
             alt=""
@@ -46,7 +53,8 @@ const PreviewPlayer = () => {
               alt=""
               width={30}
               height={30}
-              src={onVolumeImg}
+              onClick={mutedHandler}
+              src={offVolumeImg}
             />
           ) : (
             <Image
@@ -54,7 +62,8 @@ const PreviewPlayer = () => {
               alt=""
               width={30}
               height={30}
-              src={offVolumeImg}
+              onClick={mutedHandler}
+              src={onVolumeImg}
             />
           )}
         </div>

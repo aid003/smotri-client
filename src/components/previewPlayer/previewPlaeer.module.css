@@ -1,5 +1,24 @@
+.videoPlayer {
+  position: relative;
+  max-width: 1000px;
+  box-sizing: border-box;
+}
+
+.videoPlayer video {
+  width: 100%;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 0px 10px 0px;
+}
+
 .controlsIcon {
-    position: relative;
-    z-index: 33;
-    color: beige;
+    margin-right: 15px;
 }

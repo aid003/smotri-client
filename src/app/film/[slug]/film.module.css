@@ -1,0 +1,57 @@
+@font-face {
+  font-family: Junegul;
+  src: url(/public//fonts/junegull-regular.woff2);
+}
+
+.container {
+  width: 100%;
+  margin-top: 3vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(2, 2, 30);
+}
+
+.leftInfoContainer {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px 10px 15px;
+}
+
+.heading {
+  /* font-family: Junegul; */
+  font-size: 30px;
+  font-weight: 800;
+  color: white;
+  display: inline-block;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.infoCommon {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.infoCommonString {
+    /* font-family: Junegul; */
+    margin-top: 20px;
+    font-size: larger;
+    color: rgb(212, 212, 212);
+}
+
+.rightInfoContainer {
+  width: 60%;
+  display: flex;
+ 
+  justify-content: flex-end;
+}
