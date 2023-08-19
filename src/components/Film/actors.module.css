@@ -1,0 +1,19 @@
+@font-face {
+  font-family: regular;
+  src: url(/public/fonts/Bloggersans.woff2);
+}
+
+
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actors {
+    display: inline-block;
+    color: rgb(212, 212, 212);
+    word-wrap: break-word;
+    font-size: large;
+}

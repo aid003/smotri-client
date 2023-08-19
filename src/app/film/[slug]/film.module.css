@@ -5,7 +5,8 @@
 
 .container {
   width: 100%;
-  margin-top: 3vh;
+  min-height: max-content;
+  margin-top: 7vh;
   display: flex;
   flex-direction: column;
 }
@@ -13,8 +14,9 @@
 .infoContainer {
   width: 100%;
   display: flex;
+  border-radius: 25px;
   justify-content: space-between;
-  background-color: rgb(2, 2, 30);
+  background-color: rgb(1, 1, 20);
 }
 
 .leftInfoContainer {
@@ -39,7 +41,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .infoCommonString {

@@ -30,42 +30,68 @@ const PreviewPlayer = (film) => {
     videoRef.current.play();
   }, []);
 
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const handleScroll = () => {
+    const position = window.scrollY;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (scrollPosition >= 200) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+  }, [scrollPosition]);
+
+  
+
   return (
     <>
-      <div className={styles.videoPlayer}>
-        <video ref={videoRef} >
-          <source
-            src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=${film}&quality=430`}
-          ></source>
-        </video>
-        <div className={styles.controls}>
-          <Image
-            className={styles.controlsIcon}
-            alt=""
-            onClick={fullScreenHandler}
-            width={30}
-            height={30}
-            src={fullScreenImg}
-          />
-          {onSound ? (
+      <div className={styles.container}>
+        <div className={styles.videoPlayer}>
+          <video ref={videoRef}>
+            <source
+              src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=${film}&quality=430`}
+            ></source>
+          </video>
+          <div className={styles.controls}>
             <Image
               className={styles.controlsIcon}
               alt=""
+              onClick={fullScreenHandler}
               width={30}
               height={30}
-              onClick={mutedHandler}
-              src={offVolumeImg}
+              src={fullScreenImg}
             />
-          ) : (
-            <Image
-              className={styles.controlsIcon}
-              alt=""
-              width={30}
-              height={30}
-              onClick={mutedHandler}
-              src={onVolumeImg}
-            />
-          )}
+            {onSound ? (
+              <Image
+                className={styles.controlsIcon}
+                alt=""
+                width={30}
+                height={30}
+                onClick={mutedHandler}
+                src={offVolumeImg}
+              />
+            ) : (
+              <Image
+                className={styles.controlsIcon}
+                alt=""
+                width={30}
+                height={30}
+                onClick={mutedHandler}
+                src={onVolumeImg}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>

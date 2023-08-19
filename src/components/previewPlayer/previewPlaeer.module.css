@@ -1,17 +1,28 @@
+
+.container {
+  position: sticky;
+  top: 10vh
+}
+
 .videoPlayer {
   position: relative;
+  border-radius: 25px;
+  top: 0;
   max-width: 1000px;
+  height: max-content;
   box-sizing: border-box;
 }
 
 .videoPlayer video {
   width: 100%;
+  border-radius: 25px;
 }
 
 .controls {
   position: absolute;
   bottom: 0;
   left: 0;
+  height: max-content;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -21,4 +32,5 @@
 
 .controlsIcon {
     margin-right: 15px;
+    cursor: pointer;
 }
