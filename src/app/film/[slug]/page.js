@@ -6,6 +6,7 @@ import Actors from "@/components/Film/Actors";
 import TextContainer from "@/components/TextContainer/TextContainer";
 import FilmsItem from "@/components/filmItem/FilmItem";
 import NewFilms from "@/components/newFilms/NewFilms";
+import Image from "next/image";
 
 export async function getData(params) {
   const film = await customFetch(
@@ -19,6 +20,15 @@ const Page = async ({ params }) => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.photo}>
+        <Image
+          width={1920}
+          height={1080}
+          alt=""
+          className={styles.img}
+          src={`${process.env.NEXT_PUBLIC_BASE_PHOTO_URL}/${data.photo}`}
+        ></Image>
+      </div>
       <div className={styles.infoContainer}>
         <div className={styles.leftInfoContainer}>
           <h1 className={styles.heading}>{data.title.toUpperCase()}</h1>
@@ -47,8 +57,8 @@ const Page = async ({ params }) => {
               </p>
             )}
           </div>
-          <Content props={data?.description}></Content>
           <Actors props={data.actors}></Actors>
+          <Content props={data?.description}></Content>
         </div>
         <div className={styles.rightInfoContainer}>
           <PreviewPlayer film={data.title}></PreviewPlayer>

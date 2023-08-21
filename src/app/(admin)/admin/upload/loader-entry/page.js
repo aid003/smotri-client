@@ -17,6 +17,7 @@ const initialValues = {
   ageRestriction: "0",
   description: "defaulValue",
   actors: "defaulValue",
+  duration: "default",
   novelty: "ede",
   preview: "deed",
   TitleSeo: "defaulValue",
@@ -90,6 +91,12 @@ const Page = () => {
           type="text"
           name="countries"
           placeholder="countries"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="duration"
+          placeholder="duration"
           onChange={updateVideoInfoHandler}
         ></input>
         <input

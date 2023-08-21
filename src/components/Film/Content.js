@@ -20,6 +20,7 @@ const Content = ({ props }) => {
         <div className={styles.more} onClick={moreHandler}>
           {short ? "more" : "hide"}
         </div>
+        <div className={styles.watchButton}>Смотреть</div>
       </div>
     </>
   );

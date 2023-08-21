@@ -45,7 +45,7 @@ const PreviewPlayer = (film) => {
   }, []);
 
   useEffect(() => {
-    if (scrollPosition >= 200) {
+    if (scrollPosition >= 220) {
       videoRef.current.pause();
     } else {
       videoRef.current.play();
@@ -60,7 +60,7 @@ const PreviewPlayer = (film) => {
         <div className={styles.videoPlayer}>
           <video ref={videoRef}>
             <source
-              src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=${film}&quality=430`}
+              src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=${film}&quality=420`}
             ></source>
           </video>
           <div className={styles.controls}>

@@ -74,9 +74,8 @@ const Page = () => {
       <form encType="multipart/form-data">
         <input
           type="file"
-          accept=".png, .jpg, .heic, .web, .tif, .psd"
+          accept=".png, .jpg, .heic, .web, .tif, .psd, .webp"
           name="file"
-          multiple
           onChange={uploadVideoHandler}
         />
         <button onClick={uploadHandler}>upload</button>
