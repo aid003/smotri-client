@@ -45,7 +45,7 @@
   width: 100%;
   height: 10px;
   bottom: 0;
-  opacity: .8;
+  opacity: 0.8;
   position: absolute;
   /* background: linear-gradient(180deg, transparent, rgb(2, 2, 30) 70%); */
 }
@@ -60,18 +60,27 @@
   margin-top: 7px;
   margin-right: 10px;
   margin-bottom: 30px;
-  
 }
 
-@ke
-
+@keyframes ide {
+  from {
+    font-size: 12;
+    font-weight: 200;
+  }
+  to {
+    font-size: larger;
+    font-weight: 800;
+  }
+}
 
 .watchButton {
-  background-image: linear-gradient(to bottom right, #9463ff, #1912e3);;
+  background-image: linear-gradient(to bottom right, #9463ff, #1912e3);
   margin: auto;
   border-radius: 20px;
   padding: 15px 130px 15px 130px;
   color: white;
   font-size: larger;
   font-weight: 600;
+
+  /* animation: ide 1.5s infinite; */
 }

@@ -4,14 +4,14 @@ import styles from "./film.module.css";
 import Content from "@/components/Film/Content";
 import Actors from "@/components/Film/Actors";
 import TextContainer from "@/components/TextContainer/TextContainer";
-import FilmsItem from "@/components/filmItem/FilmItem";
-import NewFilms from "@/components/newFilms/NewFilms";
 import Image from "next/image";
+import VideoPlayer from "@/components/VideoPlayer/VideoPlayer";
 
 export async function getData(params) {
   const film = await customFetch(
     `${process.env.NEXT_PUBLIC_SERVER_PATH}get-film?title=${params.slug}`
   );
+
   return film;
 }
 
@@ -61,13 +61,14 @@ const Page = async ({ params }) => {
           <Content props={data?.description}></Content>
         </div>
         <div className={styles.rightInfoContainer}>
-          <PreviewPlayer film={data.title}></PreviewPlayer>
+          <PreviewPlayer film={data.preview}></PreviewPlayer>
         </div>
       </div>
       {/* <NewFilms></NewFilms> */}
       <TextContainer
         props={{ title: data.title, year: data.yearCreate, text: data.content }}
       />
+      <VideoPlayer props={{ filmsQuality: data.qualityUrls }}></VideoPlayer>
     </div>
   );
 };

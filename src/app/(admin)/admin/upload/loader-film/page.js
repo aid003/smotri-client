@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 
 const Page = () => {
   const [titles, setTitles] = useState([]);
-  const [quality, setQuality] = useState(null);
-  const [voiceActing, setVoiceActing] = useState(null);
+  const [quality, setQuality] = useState("");
+  const [voiceActing, setVoiceActing] = useState("");
   const [selectedTitle, setSelectedTitle] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
 
@@ -44,7 +44,7 @@ const Page = () => {
   };
 
   const uploadHandler = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     setQuality((prev) => ({ ...prev }));
     setSelectedTitle((prev) => ({ ...prev }));
 
@@ -52,14 +52,15 @@ const Page = () => {
       alert("Файл не выбран, выберите файл!");
       return;
     }
+
     const formData = new FormData();
     formData.append("file", videoFile);
     formData.append(
       "information",
       JSON.stringify({
         title: selectedTitle,
-        quality: quality,
         voiceActing: voiceActing,
+        quality: quality,
       })
     );
 
@@ -69,6 +70,7 @@ const Page = () => {
     }).then((res) => {
       res.status === 201 ? alert("loaded") : alert("film not loaded");
     });
+
     router.push("/admin/service/");
   };
 

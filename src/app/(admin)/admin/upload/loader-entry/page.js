@@ -19,7 +19,6 @@ const initialValues = {
   actors: "defaulValue",
   duration: "default",
   novelty: "ede",
-  preview: "deed",
   TitleSeo: "defaulValue",
   DescriptionSeo: "defaulValue",
 };
@@ -133,12 +132,6 @@ const Page = () => {
           type="text"
           name="novelty"
           placeholder="novelty"
-          onChange={updateVideoInfoHandler}
-        ></input>
-        <input
-          type="text"
-          name="preview"
-          placeholder="preview"
           onChange={updateVideoInfoHandler}
         ></input>
         <input

@@ -60,7 +60,7 @@ const PreviewPlayer = (film) => {
         <div className={styles.videoPlayer}>
           <video ref={videoRef}>
             <source
-              src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=${film}&quality=420`}
+              src={`${process.env.NEXT_PUBLIC_BASIC_PATH}film/preview/?preview=${film.film}`}
             ></source>
           </video>
           <div className={styles.controls}>
