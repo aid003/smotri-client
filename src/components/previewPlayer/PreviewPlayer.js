@@ -15,7 +15,7 @@ const PreviewPlayer = (film) => {
   const fullScreenHandler = () => {
     setFullScreen(true);
     setFullScreen((prev) => ({ ...prev }));
-    fullScreen && videoRef.current.requestFullscreen();
+    videoRef.current.requestFullscreen();
   };
 
   const mutedHandler = () => {

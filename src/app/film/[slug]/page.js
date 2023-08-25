@@ -26,6 +26,7 @@ const Page = async ({ params }) => {
           height={1080}
           alt=""
           className={styles.img}
+          priority={true}
           src={`${process.env.NEXT_PUBLIC_BASE_PHOTO_URL}/${data.photo}`}
         ></Image>
       </div>
@@ -68,7 +69,7 @@ const Page = async ({ params }) => {
       <TextContainer
         props={{ title: data.title, year: data.yearCreate, text: data.content }}
       />
-      <VideoPlayer props={{ filmsQuality: data.qualityUrls }}></VideoPlayer>
+      <VideoPlayer props={{ filmsQuality: data.qualityUrls, title: data.title }}></VideoPlayer>
     </div>
   );
 };

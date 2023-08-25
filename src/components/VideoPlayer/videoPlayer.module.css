@@ -1,0 +1,100 @@
+.container {
+  width: 100%;
+  margin-bottom: 5vh;
+}
+
+.videoPlayer {
+  position: relative;
+  border-radius: 25px;
+  top: 0;
+  max-width: 1000px;
+  height: max-content;
+  box-sizing: border-box;
+}
+
+.videoPlayer video {
+  width: 100%;
+}
+
+.iconItemBase {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.iconItemBase:hover {
+  background-color: grey;
+}
+
+.controlsTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: max-content;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.controlsBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: max-content;
+  width: 100%;
+  display: flex;
+  background-color: #1c274c;
+  margin-bottom: 4px;
+}
+
+.controlsLeftBottom {
+  width: 40%;
+  display: flex;
+  align-items: center;
+}
+
+.volumeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controlsRightBottom {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.modalWindow {
+  position: absolute;
+  top: calc(100% - 30% - 70px);
+  left: calc(100% - 45% - 10px);
+  width: 45%;
+  height: 30%;
+  background-color: #1c274c;
+}
+
+.qualityListItem {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-size: larger;
+  cursor: pointer;
+}
+
+.itemsGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconMenu {
+  font-size: 35px;
+
+}
+
+/* #1C274C */
