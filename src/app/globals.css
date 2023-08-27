@@ -47,3 +47,11 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/* video::-webkit-media-controls {
+  display:none !important;
+} */
+
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+}

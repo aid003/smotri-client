@@ -1,10 +1,7 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./videoPlayer.module.css";
 import Image from "next/image";
-
-import { RiArrowRightSLine } from "react-icons/ri";
-
 
 import playIcon from "../../../public/svg/play-svgrepo-com.svg";
 import pauseIcon from "../../../public/svg/pause-svgrepo-com.svg";
@@ -14,6 +11,7 @@ import sound2Icon from "../../../public/svg/sound-volume-2-svgrepo-com.svg";
 import settingsIcon from "../../../public/svg/settings-svgrepo-com.svg";
 import fullscreenIcon from "../../../public/svg/fullscreen-svgrepo-com.svg";
 import ContentMenu from "./ContentMenu";
+import Video from "./Video";
 
 const VideoPlayer = ({ props }) => {
   const { filmsQuality, title } = props;
@@ -62,7 +60,7 @@ const VideoPlayer = ({ props }) => {
 
   const changeFilmQualityHandler = (quality) => {
     setCurrentQuality(quality);
-    forceUpdate();
+    pauseHandler()
   };
 
   return (
@@ -70,46 +68,29 @@ const VideoPlayer = ({ props }) => {
       {!isLoadingQuality && (
         <div className={styles.videoPlayer}>
           {currentQuality && (
-            <video ref={videoRef}>
-              <source
-                src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=${title}&quality=${currentQuality}`}
-              ></source>
-            </video>
+            <Video
+              props={{
+                videoRef: videoRef,
+                currentQuality: currentQuality,
+                title: title,
+                fullScreen: fullScreen,
+              }}
+            />
           )}
+          {fullScreen && <div className={styles.fullScreenControls}>xcvb</div>}
           <div className={styles.controlsTop}></div>
           {isActiveSettingMenu && (
-            <ul
+            <div
               className={styles.modalWindow}
               onMouseLeave={settingsMenuHandler}
             >
-              <ContentMenu>
-                <li className={styles.qualityListItem}>
-                  <div className={styles.itemsGroup}>
-                    <Image
-                      alt=""
-                      width={30}
-                      height={30}
-                      src={settingsIcon}
-                      className={styles.iconItemBase}
-                    />
-                    <p>Качество</p>
-                  </div>
-                  <RiArrowRightSLine
-                    className={styles.iconMenu}
-                  ></RiArrowRightSLine>
-                </li>
-                {filmsQuality.map((el) => (
-                  <p
-                    key={el.id}
-                    onClick={() => {
-                      changeFilmQualityHandler(el.quality);
-                    }}
-                  >
-                    {el.quality}
-                  </p>
-                ))}
-              </ContentMenu>
-            </ul>
+              <ContentMenu
+                props={{
+                  filmsQuality: filmsQuality,
+                  changeFilmQualityHandler,
+                }}
+              />
+            </div>
           )}
           <div className={styles.controlsBottom}>
             <div className={styles.controlsLeftBottom}>

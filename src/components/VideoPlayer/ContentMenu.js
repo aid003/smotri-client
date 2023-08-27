@@ -1,8 +1,30 @@
+"use client";
 
-const ContentMenu = ({children}) => {
+import { useState } from "react";
+import Settings from "./Settings";
+import ContentModal from "./ContentModal";
+
+const ContentMenu = ({ props }) => {
+  const [isModalMode, setIsModalMode] =
+    useState(false);
+  const [Content, setContent] = useState(null);
+  const { filmsQuality, changeFilmQualityHandler } = props;
   return (
-      <div>{children}</div>
-  )
-}
+    <div>
+      {isModalMode && <ContentModal>{Content}</ContentModal>}
+      {!isModalMode && (
+        <Settings
+          props={{
+            filmsQuality: filmsQuality,
+            setIsModalMode: setIsModalMode,
+            changeFilmQualityHandler,
+            setContent: setContent,
+          }}
+        />
+      )}
+      {!isModalMode && <div>problem</div>}
+    </div>
+  );
+};
 
-export default ContentMenu
+export default ContentMenu;
