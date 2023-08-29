@@ -77,3 +77,10 @@
 
   justify-content: flex-end;
 }
+
+.imgAlt {
+  margin: auto;
+  border-radius: 30px;
+  width: 80%;
+  object-fit: cover;
+}

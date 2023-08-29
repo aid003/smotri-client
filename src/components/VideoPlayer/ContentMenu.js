@@ -22,7 +22,6 @@ const ContentMenu = ({ props }) => {
           }}
         />
       )}
-      {!isModalMode && <div>problem</div>}
     </div>
   );
 };

@@ -10,6 +10,7 @@ import sound1Icon from "../../../public/svg/sound-volume-1-svgrepo-com.svg";
 import sound2Icon from "../../../public/svg/sound-volume-2-svgrepo-com.svg";
 import settingsIcon from "../../../public/svg/settings-svgrepo-com.svg";
 import fullscreenIcon from "../../../public/svg/fullscreen-svgrepo-com.svg";
+import exitFullscreenIcon from "../../../public/svg/quit-full-screen-svgrepo-com.svg";
 import ContentMenu from "./ContentMenu";
 import Video from "./Video";
 
@@ -22,26 +23,29 @@ const VideoPlayer = ({ props }) => {
   const [volume, setVolume] = useState(0.5);
   const [isActiveSettingMenu, setIsActivesettingMenu] = useState(false);
   const [fullScreen, setFullScreen] = useState(false);
+  const [isShowControls, setIsShowControls] = useState(true);
 
   const videoRef = useRef(null);
+  const videoContainerRef = useRef(null);
 
-  const [, updateState] = React.useState();
-  const forceUpdate = React.useCallback(() => updateState({}), []);
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
     setCurrentQuality(filmsQuality[filmsQuality.length - 1].quality);
     setIsLoadingQuality(false);
   }, [filmsQuality]);
 
-  const playHandler = () => {
+  const playHandler = async () => {
     videoRef.current.play();
     setIsPlaying(true);
     setIsActivesettingMenu(false);
+    setIsShowControls(false);
   };
 
   const pauseHandler = () => {
     videoRef.current.pause();
     setIsPlaying(false);
+    setIsShowControls(true);
   };
 
   const volumeChangeHandler = (e) => {
@@ -54,19 +58,29 @@ const VideoPlayer = ({ props }) => {
   };
 
   const fullScreenHandler = () => {
+    videoContainerRef.current.requestFullscreen();
     setFullScreen(true);
-    videoRef.current.requestFullscreen();
+  };
+
+  const exitFullScreenHandler = () => {
+    document.exitFullscreen();
+    setFullScreen(false);
+    pauseHandler();
   };
 
   const changeFilmQualityHandler = (quality) => {
     setCurrentQuality(quality);
-    pauseHandler()
+    pauseHandler();
   };
+
+  // const playInHiddenControlsHandler = () => {
+  //   pauseHandler();
+  // };
 
   return (
     <div className={styles.container}>
       {!isLoadingQuality && (
-        <div className={styles.videoPlayer}>
+        <div className={styles.videoPlayer} ref={videoContainerRef}>
           {currentQuality && (
             <Video
               props={{
@@ -77,8 +91,21 @@ const VideoPlayer = ({ props }) => {
               }}
             />
           )}
-          {fullScreen && <div className={styles.fullScreenControls}>xcvb</div>}
-          <div className={styles.controlsTop}></div>
+          <div
+            id="video-player"
+            onClick={() => {
+              pauseHandler();
+              setIsShowControls(true);
+            }}
+            className={styles.hiddenLayout}
+          ></div>
+          {isShowControls ? (
+            <div className={styles.controlsTop}>
+              <h3 className={styles.headingTitleVideo}>{title}</h3>
+            </div>
+          ) : (
+            ""
+          )}
           {isActiveSettingMenu && (
             <div
               className={styles.modalWindow}
@@ -92,69 +119,85 @@ const VideoPlayer = ({ props }) => {
               />
             </div>
           )}
-          <div className={styles.controlsBottom}>
-            <div className={styles.controlsLeftBottom}>
-              <div className={styles.playOrPauseHandler}>
-                {isPlaying ? (
-                  <Image
-                    alt=""
-                    width={30}
-                    height={30}
-                    src={pauseIcon}
-                    className={styles.iconItemBase}
-                    onClick={pauseHandler}
+          {isShowControls ? (
+            <div className={styles.controlsBottom}>
+              <div className={styles.controlsLeftBottom}>
+                <div className={styles.playOrPauseHandler}>
+                  {isPlaying ? (
+                    <Image
+                      alt=""
+                      width={30}
+                      height={30}
+                      src={pauseIcon}
+                      className={styles.iconItemBase}
+                      onClick={pauseHandler}
+                    />
+                  ) : (
+                    <Image
+                      alt=""
+                      width={30}
+                      height={30}
+                      src={playIcon}
+                      className={styles.iconItemBase}
+                      onClick={playHandler}
+                    />
+                  )}
+                </div>
+                <div className={styles.volumeContainer}>
+                  {volume <= 0.02 ? (
+                    <Image alt="" width={30} height={30} src={soundOffIcon} />
+                  ) : volume <= 0.4 ? (
+                    <Image alt="" width={30} height={30} src={sound1Icon} />
+                  ) : (
+                    <Image alt="" width={30} height={30} src={sound2Icon} />
+                  )}
+                  <input
+                    type="range"
+                    min={0}
+                    max={1}
+                    step={0.01}
+                    onChange={volumeChangeHandler}
                   />
-                ) : (
-                  <Image
-                    alt=""
-                    width={30}
-                    height={30}
-                    src={playIcon}
-                    className={styles.iconItemBase}
-                    onClick={playHandler}
-                  />
-                )}
+                </div>
               </div>
-              <div className={styles.volumeContainer}>
-                {volume <= 0.02 ? (
-                  <Image alt="" width={30} height={30} src={soundOffIcon} />
-                ) : volume <= 0.4 ? (
-                  <Image alt="" width={30} height={30} src={sound1Icon} />
-                ) : (
-                  <Image alt="" width={30} height={30} src={sound2Icon} />
-                )}
-                <input
-                  type="range"
-                  min={0}
-                  max={1}
-                  step={0.01}
-                  onChange={volumeChangeHandler}
+              <div className={styles.controlsRightBottom}>
+                <Image
+                  alt=""
+                  width={30}
+                  height={30}
+                  src={settingsIcon}
+                  style={{marginRight: "1%"}}
+                  className={styles.iconItemBase}
+                  onMouseEnter={settingsMenuHandler}
+                  onClick={settingsMenuHandler}
                 />
+                {!fullScreen ? (
+                  <Image
+                    alt=""
+                    width={30}
+                    height={30}
+                    src={fullscreenIcon}
+                    onClick={fullScreenHandler}
+                    onMouseEnter={() => {
+                      setIsActivesettingMenu(false);
+                    }}
+                    className={styles.iconItemBase}
+                  />
+                ) : (
+                  <Image
+                    alt=""
+                    width={30}
+                    height={30}
+                    src={exitFullscreenIcon}
+                    className={styles.iconItemBase}
+                    onClick={exitFullScreenHandler}
+                  />
+                )}
               </div>
             </div>
-            <div className={styles.controlsRightBottom}>
-              <Image
-                alt=""
-                width={30}
-                height={30}
-                src={settingsIcon}
-                className={styles.iconItemBase}
-                onMouseEnter={settingsMenuHandler}
-                onClick={settingsMenuHandler}
-              />
-              <Image
-                alt=""
-                width={30}
-                height={30}
-                src={fullscreenIcon}
-                onClick={fullScreenHandler}
-                onMouseEnter={() => {
-                  setIsActivesettingMenu(false);
-                }}
-                className={styles.iconItemBase}
-              />
-            </div>
-          </div>
+          ) : (
+            ""
+          )}
         </div>
       )}
     </div>

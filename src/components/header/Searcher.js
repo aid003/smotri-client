@@ -1,10 +1,11 @@
 "use client";
 import { GetAnkets } from "@/hooks/useListFilmsAnket";
 import { ValidateSearch } from "@/middleware/validateSearch";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsFilm } from "react-icons/bs";
 import { PiStepsFill } from "react-icons/pi";
 import styles from "./Header.module.css";
+import { useRouter } from "next/navigation";
 
 const Searcher = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -12,6 +13,10 @@ const Searcher = () => {
   const [isOpenWindow, setIsOpenWindow] = useState(false);
 
   const [isLoadingAnkets, setIsLoadingAnkets] = useState(true);
+
+  const router = useRouter(null);
+
+  const inputRef = useRef(null);
 
   useEffect(() => {
     async function getAnkets() {
@@ -34,8 +39,12 @@ const Searcher = () => {
     console.log(searchResult);
   };
 
-  const openWindowHandler = (e) => {
+  const openWindowHandler = () => {
     setIsOpenWindow(true);
+  };
+
+  const choseItemHandler = (title) => {
+    router.push(`/film/${title}`);
   };
 
   return (
@@ -43,6 +52,7 @@ const Searcher = () => {
       <input
         className={isOpenWindow ? styles.inputWithModal : styles.input}
         placeholder="Input your film"
+        ref={inputRef}
         onChange={inputHandler}
         onClick={openWindowHandler}
       ></input>
@@ -50,7 +60,13 @@ const Searcher = () => {
         (searchResult.length !== 0 ? (
           <div className={styles.searcherWindow}>
             {searchResult.map((el) => (
-              <div className={styles.filmItem} key={el.title}>
+              <div
+                className={styles.filmItem}
+                key={el.title}
+                onClick={() => {
+                  choseItemHandler(el.title);
+                }}
+              >
                 <div className={styles.filmItemGroup}>
                   <BsFilm className={styles.iconFilm}></BsFilm>
                   <p className={styles.filmTitle}>{el.title}</p>
@@ -65,9 +81,20 @@ const Searcher = () => {
           </div>
         ) : (
           <div className={styles.searcherWindow}>
-            <p className={styles.nothingSearch}>По вашему запросу ничего не найдено...</p>
+            <p className={styles.nothingSearch}>
+              По вашему запросу ничего не найдено...
+            </p>
           </div>
         ))}
+      {isOpenWindow && (
+        <div
+          className={styles.useOnClickOutside}
+          onClick={() => {
+            setIsOpenWindow(false);
+            inputRef.current.value = "";
+          }}
+        ></div>
+      )}
     </div>
   );
 };

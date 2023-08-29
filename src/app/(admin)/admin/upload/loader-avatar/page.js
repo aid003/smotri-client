@@ -7,7 +7,7 @@ import { useAccessValidator } from "@/hooks/useAccessValidator";
 
 const Page = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedFilm, setSelectedFilm] = useState(null);
+  const [selectedTitle, setSelectedTitle] = useState(null);
   const [titles, setTitles] = useState([]);
 
   const router = useRouter();
@@ -21,13 +21,13 @@ const Page = () => {
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    if (!selectedFile | !selectedFilm) {
+    if (!selectedFile | !selectedTitle) {
       alert("Фото не выбрано | Фильм не выбран. Определись что хочешь!");
       return;
     }
     const formData = new FormData();
     formData.append("avatar", selectedFile);
-    formData.append("filmTitle", JSON.stringify(selectedFilm));
+    formData.append("filmTitle", JSON.stringify({ value: selectedTitle }));
     console.log(formData);
 
     // process.env.UPLOAD_PATH
@@ -44,8 +44,9 @@ const Page = () => {
     console.log(data);
   };
 
-  const filmTitlePicker = (value) => {
-    setSelectedFilm({ value });
+
+  const changePickedTitleHandler = ({ target }) => {
+    setSelectedTitle(target.value);
   };
 
   useEffect(() => {
@@ -62,6 +63,20 @@ const Page = () => {
     <>
       <HeaderService />
       <form encType="multipart/form-data">
+        <select onChange={changePickedTitleHandler}>
+          <option value={null}>Выберите фильм</option>
+          {titles.map((el) => (
+            <option
+              value={el.title}
+              key={el.title}
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              {el.title}
+            </option>
+          ))}
+        </select>
         <input
           type="file"
           accept=".png, .jpg, .heic, .web, .tif, .psd"
@@ -69,20 +84,6 @@ const Page = () => {
           onChange={handleChange}
         />
         <input type="submit" onClick={handleUpload} />
-        <div>
-          {titles.map((el) => (
-            <p
-              value={el.title}
-              key={el.title}
-              onClick={(e) => {
-                e.preventDefault();
-                filmTitlePicker(el.title);
-              }}
-            >
-              {el.title}
-            </p>
-          ))}
-        </div>
       </form>
     </>
   );

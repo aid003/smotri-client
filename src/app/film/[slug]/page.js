@@ -15,6 +15,18 @@ export async function getData(params) {
   return film;
 }
 
+export async function generateMetadata({ params }) {
+  const { data } = await getData(params);
+
+  return {
+    title: data.TitleSeo,
+    description: data.DescriptionSeo,
+    keywords: data.KeywordsSeo,
+    applicationName: data.applicationNameSeo,
+    colorScheme: data.colorSchemeSeo,
+  };
+}
+
 const Page = async ({ params }) => {
   const { data } = await getData(params);
 
@@ -62,14 +74,26 @@ const Page = async ({ params }) => {
           <Content props={data?.description}></Content>
         </div>
         <div className={styles.rightInfoContainer}>
-          <PreviewPlayer film={data.preview}></PreviewPlayer>
+          {data.preview ? (
+            <PreviewPlayer film={data.preview}></PreviewPlayer>
+          ) : (
+            <Image
+              width={900}
+              height={400}
+                alt=""
+                className={styles.imgAlt}
+              src={`${process.env.NEXT_PUBLIC_BASE_PHOTO_URL}/${data.photo}`}
+            ></Image>
+          )}
         </div>
       </div>
       {/* <NewFilms></NewFilms> */}
       <TextContainer
         props={{ title: data.title, year: data.yearCreate, text: data.content }}
       />
-      <VideoPlayer props={{ filmsQuality: data.qualityUrls, title: data.title }}></VideoPlayer>
+      <VideoPlayer
+        props={{ filmsQuality: data.qualityUrls, title: data.title }}
+      />
     </div>
   );
 };

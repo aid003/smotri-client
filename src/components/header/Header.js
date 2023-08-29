@@ -6,7 +6,7 @@ const Header = ({ children }) => {
     <>
       <div className={styles.headerContainer}>
         <div className={styles.widthContainer}>
-          <h1>Title</h1>
+          <h1 className={styles.mainHeading}>Smotri tyt</h1>
           <Searcher></Searcher>
         </div>
       </div>

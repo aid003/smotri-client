@@ -18,9 +18,11 @@ const Content = ({ props }) => {
           {short && <span className={styles.cloud}></span>}
         </div>
         <div className={styles.more} onClick={moreHandler}>
-          {short ? "more" : "hide"}
+          {short ? "Детали о фильме" : "Свернуть детали"}
         </div>
-        <div className={styles.watchButton}>Смотреть</div>
+        <a className={styles.watchButton} href="#video-player">
+          Смотреть
+        </a>
       </div>
     </>
   );

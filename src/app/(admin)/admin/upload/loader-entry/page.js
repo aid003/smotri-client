@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const initialValues = {
-  title: "defaulValue",
-  ratingFilm: "0",
+  title: "No Value",
+  ratingFilm: "5.5",
   postersUrl: "psYrl.jpg",
   yearCreate: "0",
   countries: "defaulValue",
@@ -19,8 +19,11 @@ const initialValues = {
   actors: "defaulValue",
   duration: "default",
   novelty: "ede",
-  TitleSeo: "defaulValue",
-  DescriptionSeo: "defaulValue",
+  TitleSeo: "No Title",
+  DescriptionSeo: "Смотри в лучшем качестве бесплатно",
+  KeywordsSeo: "watch free",
+  applicationNameSeo: "Smotri tyt",
+  colorSchemeSeo: "dark",
 };
 
 const initialState = { values: initialValues };
@@ -144,6 +147,24 @@ const Page = () => {
           type="text"
           name="DescriptionSeo"
           placeholder="DescriptionSeo"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="KeywordsSeo"
+          placeholder="KeywordsSeo"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="applicationNameSeo"
+          placeholder="applicationNameSeo"
+          onChange={updateVideoInfoHandler}
+        ></input>
+        <input
+          type="text"
+          name="colorSchemeSeo"
+          placeholder="colorSchemeSeo"
           onChange={updateVideoInfoHandler}
         ></input>
         <input type="submit" onClick={handleUpload}></input>
