@@ -31,7 +31,7 @@ const VideoPlayer = ({ props }) => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
-    setCurrentQuality(filmsQuality[filmsQuality.length - 1].quality);
+    setCurrentQuality(filmsQuality[0].quality);
     setIsLoadingQuality(false);
   }, [filmsQuality]);
 

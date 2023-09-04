@@ -50,7 +50,7 @@ export default function Home() {
             router.push("/admin/upload/loader-photos");
           }}
         >
-          Загрузка фотографий для фильма
+          Загрузка фото для фильма
         </li>
         <li
           className={styles.listItem}
