@@ -144,7 +144,7 @@ const VideoPlayer = ({ props }) => {
                   )}
                 </div>
                 <div className={styles.volumeContainer}>
-                  {volume <= 0.02 ? (
+                  {volume <= 0.01 ? (
                     <Image alt="" width={30} height={30} src={soundOffIcon} />
                   ) : volume <= 0.4 ? (
                     <Image alt="" width={30} height={30} src={sound1Icon} />

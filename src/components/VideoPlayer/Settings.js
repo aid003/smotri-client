@@ -14,6 +14,8 @@ const Settings = ({ props }) => {
     setContent(null);
   };
 
+  console.log(filmsQuality)
+
   const showElementHandler = () => {
     setIsModalMode(true);
     setContent(
