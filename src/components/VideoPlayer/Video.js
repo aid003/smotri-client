@@ -9,6 +9,7 @@ const Video = ({ props }) => {
     <>
       <video
         className={styles.videoItem}
+        id="videoId"
         ref={videoRef}
         src={`${process.env.NEXT_PUBLIC_BASIC_PATH}films/?title=${title}&quality=${currentQuality}`}
       />

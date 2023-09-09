@@ -41,6 +41,14 @@
   border-radius: 20px;
 }
 
+.videoTimeAll {
+  color: white;
+}
+
+.videoTimeCurrent {
+  color: white;
+}
+
 .controlsTop {
   position: absolute;
   top: 0;
@@ -172,5 +180,15 @@
   background-color: rgb(40, 40, 40);
   border-radius: 20px;
 }
+
+.progressBarContainer {
+  margin: auto;
+  width: 90%;
+  height: 20%;
+  background-color: rgb(54, 54, 54);
+  border-radius: 20px;
+  
+}
+
 
 /* #1C274C */

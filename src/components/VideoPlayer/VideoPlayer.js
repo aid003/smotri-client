@@ -24,11 +24,21 @@ const VideoPlayer = ({ props }) => {
   const [isActiveSettingMenu, setIsActivesettingMenu] = useState(false);
   const [fullScreen, setFullScreen] = useState(false);
   const [isShowControls, setIsShowControls] = useState(true);
+  const [videoTime, setVideoTime] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   const videoRef = useRef(null);
   const videoContainerRef = useRef(null);
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  useEffect(() => {
+    window.setInterval(function () {
+      setCurrentTime(videoRef.current?.currentTime);
+      setProgress((videoRef.current?.currentTime / videoTime) * 100);
+    }, 1000);
+  });
 
   useEffect(() => {
     setCurrentQuality(filmsQuality[0].quality);
@@ -40,6 +50,9 @@ const VideoPlayer = ({ props }) => {
     setIsPlaying(true);
     setIsActivesettingMenu(false);
     setIsShowControls(false);
+    let vid = document.getElementById("videoId");
+    setVideoTime(vid.duration);
+    console.log(Math.round(progress));
   };
 
   const pauseHandler = () => {
@@ -76,6 +89,15 @@ const VideoPlayer = ({ props }) => {
   // const playInHiddenControlsHandler = () => {
   //   pauseHandler();
   // };
+
+  const status = {
+    content: "",
+    display: "block",
+    background: "rgb(47, 47, 184)",
+    width: `${Math.round(progress)}%`,
+    height: "100%",
+    borderRadius: "20px",
+  };
 
   return (
     <div className={styles.container}>
@@ -143,8 +165,18 @@ const VideoPlayer = ({ props }) => {
                     />
                   )}
                 </div>
+                {/* <p className={styles.videoTimeAll}>
+                  {Math.floor(videoTime / 60) +
+                    ":" +
+                    ("0" + Math.floor(videoTime % 60)).slice(-2)}
+                </p>
+                <p className={styles.videoTimeCurrent}>
+                  {Math.floor(currentTime / 60) +
+                    ":" +
+                    ("0" + Math.floor(currentTime % 60)).slice(-2)}
+                </p> */}
                 <div className={styles.volumeContainer}>
-                  {volume == 0.00 ? (
+                  {volume == 0.0 ? (
                     <Image alt="" width={30} height={30} src={soundOffIcon} />
                   ) : volume <= 0.4 ? (
                     <Image alt="" width={30} height={30} src={sound1Icon} />
@@ -161,12 +193,15 @@ const VideoPlayer = ({ props }) => {
                 </div>
               </div>
               <div className={styles.controlsRightBottom}>
+                <div className={styles.progressBarContainer}>
+                  <p style={status}></p>
+                </div>
                 <Image
                   alt=""
                   width={30}
                   height={30}
                   src={settingsIcon}
-                  style={{marginRight: "1%"}}
+                  style={{ marginRight: "1%" }}
                   className={styles.iconItemBase}
                   onMouseEnter={settingsMenuHandler}
                   onClick={settingsMenuHandler}

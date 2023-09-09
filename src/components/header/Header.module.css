@@ -154,3 +154,68 @@
   top: 0;
   content: "";
 }
+
+@media (max-width: 600px) {
+  .mainHeading {
+    font-size: large;
+  }
+
+  .widthContainer {
+    width: 90%;
+  }
+
+  .input {
+    width: 200px;
+  }
+
+  .inputWithModal {
+    width: 200px;
+  }
+
+  .searcherWindow {
+    width: 215px;
+  }
+}
+
+@media (max-width: 290px) {
+  .mainHeading {
+    font-size: 14px;
+  }
+
+  .input {
+    width: 120px;
+  }
+
+  .inputWithModal {
+    width: 120px;
+  }
+
+  .searcherWindow {
+    width: 135px;
+  }
+}
+
+@media (max-height: 660px) {
+  .input {
+    height: 22px;
+  }
+}
+
+@media (max-height: 570px) {
+  .input {
+    height: 3vh;
+    font-size: 15px;
+  }
+}
+
+@media (max-height: 350px) {
+  .input {
+    height: 3vh;
+    font-size: 12px;
+  }
+
+  .mainHeading {
+    font-size: 14px;
+  }
+
+}
