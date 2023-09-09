@@ -29,6 +29,8 @@ export default function Home() {
               <Showcase>
                 <NewFilms></NewFilms>
                 <div className={styles.space}></div>
+                <NewFilms></NewFilms>
+                <div className={styles.space}></div>
               </Showcase>
             </Suspense>
           </div>
