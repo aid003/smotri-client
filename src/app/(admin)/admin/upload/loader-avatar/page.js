@@ -38,12 +38,12 @@ const Page = () => {
         method: "POST",
         body: formData,
       }
-    );
+    ).then((res) => {
+      res.status === 201 ? alert("loaded") : alert("avatar not loaded");
+    });
 
-    const data = await res.json();
-    console.log(data);
+    
   };
-
 
   const changePickedTitleHandler = ({ target }) => {
     setSelectedTitle(target.value);

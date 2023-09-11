@@ -30,6 +30,8 @@ export async function generateMetadata({ params }) {
 const Page = async ({ params }) => {
   const { data } = await getData(params);
 
+  console.log(data);
+
   return (
     <div className={styles.container}>
       <div className={styles.photo}>
@@ -80,8 +82,8 @@ const Page = async ({ params }) => {
             <Image
               width={900}
               height={400}
-                alt=""
-                className={styles.imgAlt}
+              alt=""
+              className={styles.imgAlt}
               src={`${process.env.NEXT_PUBLIC_BASE_PHOTO_URL}/${data.photo}`}
             ></Image>
           )}
